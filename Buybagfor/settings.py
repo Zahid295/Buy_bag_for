@@ -20,6 +20,8 @@ ALLOWED_HOSTS = ['8000-zahid295-buybagfor-13zu9uq8nhn.ws.codeinstitute-ide.net']
 # Application definition
 
 INSTALLED_APPS = [
+    'home',
+    'products',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -30,8 +32,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'home',
-    'products',
 ]
 
 MIDDLEWARE = [
