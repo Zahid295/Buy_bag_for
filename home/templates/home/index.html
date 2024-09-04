@@ -1,9 +1,37 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block title %}Home - Buybag{% endblock %}
+{% block title %}Home - Nearby Furniture Store{% endblock %}
 
 {% block content %}
-<h1>Welcome to Buybag</h1>
-<p>Explore our wide range of furniture products and find the perfect pieces for your home.</p>
-<a href="#">View Products</a>
+<h1 class="Welcome-heading">Welcome to Our Nearby Furniture Store</h1>
+<!-- Featured Products Section -->
+<section class="featured-products">
+    <h1 class="feature-heading">Featured Products</h1>
+    <div class="products-list">
+        {% for product in featured_products %}
+        <div class="products">
+            <h2>{{ product.name }}</h2>
+            <img src="{% static 'images/'|add:product.image_url %}" alt="{{ product.name }}">
+            <p>{{ product.description|truncatechars:150 }}</p>
+            <p>Price: ${{ product.price }}</p>
+            <a href="{% url 'product_details' product.id %}">View Details</a>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'all_products' %}">View All Products</a>
+</section>
+
+<!-- About Us Section -->
+<section class="about-us">
+    <h2>About Us</h2>
+    <p>Learn more about our mission and the quality of our handcrafted furniture.</p>
+    <a href="{% url 'about' %}">Learn More About Us</a>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+    <h2>Contact Us</h2>
+    <p>Have questions? Our friendly staff is here to help!</p>
+    <a href="{% url 'contact' %}">Get in Touch</a>
+</section>
 {% endblock %}
