@@ -3,27 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Buybag{% endblock %}</title>
+    <title>{% block title %}Furniture Store{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Cart</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'all_products' %}">Products</a></li>
+            <li><a href="{% url 'cart' %}">Cart</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
             {% if user.is_authenticated %}
-                <li><a href="#">Order History</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="{% url 'order_history' %}">Order History</a></li>
+                <li><a href="{% url 'account_logout' %}">Logout</a></li>
             {% else %}
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
+                <li><a href="{% url 'account_login' %}">Login</a></li>
+                <li><a href="{% url 'account_signup' %}">Register</a></li>
             {% endif %}
         </ul>
     </nav>
+
+    <!-- Flash Messages -->
+    {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
     <main>
         {% block content %}
@@ -32,10 +41,11 @@
 
     <footer>
         <p>Follow us on:
-            <a href="#">Facebook</a>,
-            <a href="#">Twitter</a>,
-            <a href="#">Instagram</a>
+            <a href="https://www.facebook.com" target="_blank">Facebook</a>,
+            <a href="https://twitter.com" target="_blank">Twitter</a>,
+            <a href="https://www.instagram.com" target="_blank">Instagram</a>
         </p>
     </footer>
 </body>
 </html>
+
