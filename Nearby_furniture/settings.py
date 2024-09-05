@@ -1,5 +1,9 @@
-import os
 from pathlib import Path
+import os
+import dj_database_url
+if os.path.isfile('env.py'):
+    import env
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,7 +18,7 @@ SECRET_KEY = 'django-insecure-6b)oi$^*y@$-1i)!!pi!jwsph%5kybi&l3%lj3m#amb+8t*nn(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-zahid295-buybagfor-13zu9uq8nhn.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = ['8000-zahid295-nearbyfurnitur-2ofwk6soivs.ws.codeinstitute-ide.net']
 
 
 # Application definition
@@ -46,15 +50,14 @@ MIDDLEWARE = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-zahid295-buybagfor-13zu9uq8nhn.ws.codeinstitute-ide.net',
 ]
 
-ROOT_URLCONF = 'Buybagfor.urls'
+ROOT_URLCONF = 'Nearby_furniture.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,17 +90,36 @@ LOGIN_REDIRECT_URL = "/accounts/login/"
 LOGOUT_REDIRECT_URL = "/"
 
 
-WSGI_APPLICATION = 'Buybagfor.wsgi.application'
+WSGI_APPLICATION = 'Nearby_furniture.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+
+}
+
+
+# Logging configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'error.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
 }
 
 
@@ -138,11 +160,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
