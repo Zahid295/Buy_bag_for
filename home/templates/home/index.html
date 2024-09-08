@@ -15,13 +15,13 @@
         {% for product in featured_products %}
         <div class="product">
             <h2>{{ product.name }}</h2>
-            <img src="{{ product.image_url }}" alt="{{ product.name }}">
+            <img src="{% static 'images/' %}{{ product.image_url }}" alt="{{ product.name }}">
             <p>{{ product.description }}</p>
             <p>Price: ${{ product.price }}</p>
         </div>
     {% endfor %}
     </div>
-    <a href="#">View All Products</a>
+    <a href="{% url 'all_products' %}">View All Products</a>
 </section>
 
 <!-- About Us Section -->

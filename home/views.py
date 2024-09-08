@@ -29,7 +29,7 @@ def check_db_connection(request):
 
 def index(request):
     # Fetch the first 3 products
-    featured_products = Product.objects.all()[:5]
+    featured_products = Product.objects.all()[:3]
     if not featured_products:
         print("No featured products found.")
     print("Fetched the products")
