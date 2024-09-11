@@ -24,6 +24,8 @@ ALLOWED_HOSTS = ['8000-zahid295-nearbyfurnitur-2ofwk6soivs.ws.codeinstitute-ide.
 # Application definition
 
 INSTALLED_APPS = [
+    'orders',
+    'cart',
     'home',
     'products',
     'django.contrib.admin',
