@@ -4,11 +4,21 @@ from orders.models import Order, OrderItems
 from products.models import Product
 from django.contrib.auth.decorators import login_required
 
+# @login_required
+# def add_to_cart(request, product_id):
+#     product = get_object_or_404(Product, id=product_id)
+#     order, created = Order.objects.get_or_create(user=request.user, status='Pending')
+#     order_item, created = OrderItems.objects.get_or_create(order=order, product=product, price=product.price)
+#     if not created:
+#         order_item.quantity += 1
+#         order_item.save()
+#     return redirect('view_cart')
+
 @login_required
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     order, created = Order.objects.get_or_create(user=request.user, status='Pending')
-    order_item, created = OrderItems.objects.get_or_create(order=order, product=product, price=product.price)
+    order_item, created = OrderItems.objects.get_or_create(order=order, product=product, defaults={'quantity': 1, 'price': product.price})
     if not created:
         order_item.quantity += 1
         order_item.save()
