@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Order Confirmation - Furniture Store{% endblock %}
+
+{% block content %}
+<h2>Order Confirmation</h2>
+<p>Thank you for your purchase! Your order has been placed successfully.</p>
+<p>Order ID: {{ order.id }}</p>
+<p>Order Date: {{ order.order_date }}</p>
+<p>Status: {{ order.status }}</p>
+<h3>Order Items</h3>
+<ul>
+    {% for item in order.order_items.all %}
+    <li>{{ item.quantity }} x {{ item.product.name }} - ${{ item.get_total_price }}</li>
+    {% endfor %}
+</ul>
+<p>Total Price: ${{ order.order_items.all|get_total_price }}</p>
+{% endblock %}
